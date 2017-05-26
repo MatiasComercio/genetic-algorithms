@@ -1,8 +1,8 @@
 function  population_fitness = calculate_population_fitness( population )
-    population_fitness = zeros(length(population));
+    %population_fitness = zeros(length(population));
     total_fitness = 0;
     for i=1:length(population)
-        individual_fitness = population(i).fitness;
+        individual_fitness = population(i).fitness(population(i));
         population_fitness(i).fitness = individual_fitness;
         total_fitness = total_fitness + individual_fitness;
     end
