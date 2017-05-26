@@ -3,7 +3,7 @@ function out = get_config( input_string )
 
     switch lower(input_string)
         case 'main'
-            out.N = 10;
+            out.N = 2;
             out.fitness_function = @assassin_fitness;
             out.min_height = 1.3;
             out.max_height = 2;
