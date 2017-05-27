@@ -3,4 +3,3 @@ function parents = elite_selection(population, population_fitness, K)
     [~, indexes] = sort([population_fitness.fitness], 'descend');
     parents = population(indexes(1:K));
 end
-

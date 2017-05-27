@@ -1,6 +1,6 @@
 function population = initialize_population(population_size, fitness_function, stats_multiplier, min_height, max_height)
     all_items = load_items();
-    %population = zeros(population_size);
+    population(population_size) = new_character(0,0,0,0);
     
     for i=1:population_size
         items_set = choose_random_items_set(all_items);

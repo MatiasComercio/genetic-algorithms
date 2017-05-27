@@ -1,20 +1,21 @@
 config = get_config('main');
 N = config.N;
+K = config.K;
 fitness_function = config.fitness_function;
 stats_multiplier = config.stats_multiplier;
 min_height = config.min_height;
 max_height = config.max_height;
 parent_selection_function = config.parent_selection_function;
+crossover_function = config.crossover_function;
 
 population = initialize_population(N, fitness_function, stats_multiplier, min_height, max_height);
-population_fitness = calculate_population_fitness(population);
 
 finished = false;
 while ~finished
+    population_fitness = calculate_population_fitness(population);
     %The main idea is:
-    parents = parent_selection_function(population, population_fitness, K);    
-    
-    %children = cross_over_parents(parents);
+    parents = parent_selection_function(population, population_fitness, K);
+    children = crossover_function(parents(1), parents(2)); %TODO: Choose combinations of parents to crossover
     %children = mutate(children);
     %population = horzconcat(parent, children);
     %population_fitness = calculate_population_fitness(population);

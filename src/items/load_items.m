@@ -13,6 +13,7 @@ function class_stats = load_class_stats(class_name)
     class_stats_original = tdfread(class_filename);
 
     for i = 1:length(class_stats_original.id)    
+        class_stats(i).id = class_stats_original.id(i);
         class_stats(i).strength = class_stats_original.Fu(i);
         class_stats(i).agility = class_stats_original.Ag(i);
         class_stats(i).expertise = class_stats_original.Ex(i);
