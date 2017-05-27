@@ -1,47 +1,24 @@
 function parents = tournament_probabilistic_selection( population, K, ~ )
-    population_fitness = calculate_population_fitness(population);
     m = 2; %TODO add it to the config file
-    randoms = rand(K,1);
-    indexes = zeros(K);
+    
+    population_indexes = 1:length(population);
+    population_fitness = calculate_population_fitness(population);
 
+    indexes = zeros(K);
     for i = 1:K
-        random_indexes = randi([1 length(population)], m, 1);
-        [index_min, index_max] = get_bounds_fitness_index( ...
-            population_fitness, random_indexes);
-        
-        if (randoms(i) < 0.75)
-            indexes(i) = index_max;
+        % Obtain a random sample of indexes from the population
+        population_indexes_sample = randsample(population_indexes, m);
+        population_fitness_sample = ...
+            population_fitness(population_indexes_sample);
+        % Get the index of the max or min fitness in the sample taken
+        if (rand() < 0.75)
+            [~, curr_value_index] = max([population_fitness_sample.fitness]);
         else
-            indexes(i) = index_min;
+            [~, curr_value_index] = min([population_fitness_sample.fitness]);
         end
+        
+        indexes(i) = curr_value_index;
     end
 
     parents = population(indexes);
-end
-
-function [index_min, index_max] = get_bounds_fitness_index( ...
-    population_fitness, random_indexes )
-    
-    index_min = random_indexes(1);
-    min = population_fitness(random_indexes(1)).fitness;
-    
-    index_max = random_indexes(1);
-    max = population_fitness(random_indexes(1)).fitness;
-    
-    for i = 2:length(random_indexes)
-        index_curr = random_indexes(i);
-        curr = population_fitness(curr_index).fitness;
-        
-        % Check if min value needs to be updated
-        if (curr_fitness < min)
-            min = curr;
-            index_min = index_curr;
-        end
-        
-        % Check if max value needs to be updated
-        if (curr_fitness > max)
-            max = curr;
-            index_max = index_curr;
-        end
-    end
 end

@@ -1,34 +1,19 @@
 function parents = tournament_deterministic_selection( population, K, ~ )
-    population_fitness = calculate_population_fitness(population);
-    indexes = zeros(K);
     m = 2; %TODO add it to the config file
     
+    population_indexes = 1:length(population);
+    population_fitness = calculate_population_fitness(population);
 
+    indexes = zeros(K);
     for i = 1:K
-        % Obtain a random sample from the population
-        random_indexes = randi([1 length(population)], m, 1);
+        % Obtain a random sample of indexes from the population
+        population_indexes_sample = randsample(population_indexes, m);
+        population_fitness_sample = ...
+            population_fitness(population_indexes_sample);
         % Get the index of the max fitness in the sample taken
-        index_max = get_max_fitness_index(population_fitness, ...
-            random_indexes);
-        indexes(i) = index_max;
+        [~, max_value_index] = max([population_fitness_sample.fitness]);
+        indexes(i) = population_sample_indexes(max_value_index);
     end
 
     parents = population(indexes);
-end
-
-function index_max = get_max_fitness_index( population_fitness, ...
-    random_indexes )
-    
-    index_max = random_indexes(1);
-    max = population_fitness(random_indexes(1)).fitness;
-    
-    for i = 2:length(random_indexes)
-        index_curr = random_indexes(i);
-        curr = population_fitness(index_curr).fitness;
-        
-        if (curr > max)
-            max = curr;
-            index_max = index_curr;
-        end
-    end
 end
