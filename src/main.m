@@ -24,4 +24,5 @@ while ~finished
     %population = replace_population(population, population_fitness);
     %finished = isFinished(population, population_fitness);
     finished = true; %TODO DELETE!!
+    generation = generation + 1;
 end
