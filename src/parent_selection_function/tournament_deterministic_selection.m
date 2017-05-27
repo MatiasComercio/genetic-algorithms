@@ -1,5 +1,6 @@
 function parents = tournament_deterministic_selection( population, K, ~ )
-    m = 2; %TODO add it to the config file
+    config = get_config('tournament_selection');
+    m = config.m;
     
     population_indexes = 1:length(population);
     population_fitness = calculate_population_fitness(population);

@@ -42,7 +42,9 @@ function out = get_config( input_string )
             out.stats_multiplier.expertise = 1;
             out.stats_multiplier.resistance = 1.1;
             out.stats_multiplier.vitality = 1;
-     otherwise
+	case 'tournament_selection'        
+            out.m = 2;
+	otherwise
             error('%s config not found', upper(input_string));
     end
 end
