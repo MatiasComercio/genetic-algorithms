@@ -4,8 +4,8 @@ function character = new_character( height, items_set, fitness_function, stats_m
     character.items_set = items_set;
     character.stats_multiplier = stats_multiplier;
     character.fitness_function = fitness_function;
-    character.fitness = @(character) calculate_fitness(character.height, character.fitness_function, character.items_set, ...
-        character.stats_multiplier);
+    character.fitness = calculate_fitness(height, fitness_function, ...
+        items_set, stats_multiplier);
 end
 
 %% Private Functions

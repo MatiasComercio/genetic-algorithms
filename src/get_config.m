@@ -14,6 +14,9 @@ function out = get_config( input_string )
             %           warrior_fitness
             out.fitness_function = @assassin_fitness;
             
+            % Possible: exponential_temperature
+            out.temperature_function = @exponential_temperature;
+            out.temperature_initial = NaN;
             % Possible: elite_selection
             %           roulette_selection
             %           universal_selection
