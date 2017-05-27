@@ -1,14 +1,33 @@
 function character = new_character( height, items_set, fitness_function, stats_multiplier )
     character = struct;
+    character.id = get_new_id;
     character.height = height;
     character.items_set = items_set;
     character.stats_multiplier = stats_multiplier;
     character.fitness_function = fitness_function;
     character.fitness = calculate_fitness(height, fitness_function, ...
         items_set, stats_multiplier);
+    character.to_string = @(character) (character_to_string(character));
 end
 
 %% Private Functions
+function string = character_to_string(character)
+  format long;
+  items_set = character.items_set;
+  string = sprintf("Height: %f, Boots: %i, Chest: %i, Gloves: %i, Helmet: %i, Weapon: %i", character.height, ...
+    items_set.boots.id, items_set.chest.id, items_set.gloves.id, items_set.helmet.id, items_set.weapon.id);
+  format short;
+end
+
+function id = get_new_id()
+  global id_counter;
+  if isempty(id_counter)
+    id_counter = 0;
+  end
+  id_counter = id_counter + 1;
+  id = id_counter;
+end
+
 function fitness = calculate_fitness(height, fitness_function, items_set, stats_multiplier)
     raw_character_stats = calculate_raw_character_stats(items_set, stats_multiplier);
     character_stats = calculate_character_stats(raw_character_stats);
