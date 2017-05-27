@@ -16,6 +16,7 @@ generation = 0;
 finished = false;
 while ~finished
     T = get_temperature(generation, T);
+    % TODO: implement a two-function-selection
     parents = parent_selection_function(population, K, T);
     children = crossover_function(parents(1), parents(2)); %TODO: Choose combinations of parents to crossover
     %children = mutate(children);

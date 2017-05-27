@@ -1,17 +1,17 @@
 function parents = boltzmann_selection( population, K, T )
 
     population_fitness = calculate_population_fitness(population);
-    population_mean = mean(exp.^([population_fitness.fitness]./T));
     % Calc exptected values
-    expected_values = exp.^([population_fitness.fitness]./T) ./ ...
-        population_mean;
+    exp_aux = exp.^([population_fitness.fitness]./T);
+    expected_values = exp_aux ./ mean(exp_aux);
     
     % Sort the expected values from high to low
     % and get the indexes of the original expected values
-    [~, idx_sorted_expected_values] = sort(expected_values, 'descend');
+    [sort_expected_values, sort_expected_values_indexes] = ...
+        sort(expected_values, 'descend');
     
     % Get cumulated fitness
-    F = sum([population_fitness.fitness]);
+    F = sum([population_fitness(:).fitness]);
     
     % Get K random values in [0,F]
     randoms = F .* rand(K,1);
@@ -21,20 +21,8 @@ function parents = boltzmann_selection( population, K, T )
     for i = 1:K
         r_i = randoms(i);
         
-        for j = 1:length(expected_values)
-            % Get the index of the next highest expected value
-            index = idx_sorted_expected_values(j);
-            % Get the expected value of the original array
-            expected_value = expected_values(index);
-            
-            if (r_i < expected_value)
-                % Save the index of the parent
-                indexes(i) = index;
-                
-                % Stop looking for the individual
-                break;
-            end
-        end 
+        sort_index = find(r_i < sort_expected_values, 1);
+        indexes(i) = sort_expected_values_indexes(sort_index);
     end
     
     parents = population(indexes);

@@ -11,8 +11,8 @@ function parents = tournament_deterministic_selection( population, K, ~ )
         population_fitness_sample = ...
             population_fitness(population_indexes_sample);
         % Get the index of the max fitness in the sample taken
-        [~, max_value_index] = max([population_fitness_sample.fitness]);
-        indexes(i) = population_sample_indexes(max_value_index);
+        [~, max_value_index] = max([population_fitness_sample(:).fitness]);
+        indexes(i) = population_indexes_sample(max_value_index);
     end
 
     parents = population(indexes);

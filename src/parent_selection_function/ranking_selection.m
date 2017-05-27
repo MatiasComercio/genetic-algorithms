@@ -7,7 +7,7 @@ function parents = ranking_selection( population, K, ~ )
     % Choose K values in which each individual 
     % is selected with probability i stored in the weights
     indexes = randsample(fitness_sort_indexes, K, true, ...
-        1:length(population_fitness));
+        1:length(fitness_sort_indexes));
     
     parents = population(indexes);
 end

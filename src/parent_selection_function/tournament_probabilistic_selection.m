@@ -17,7 +17,7 @@ function parents = tournament_probabilistic_selection( population, K, ~ )
             [~, curr_value_index] = min([population_fitness_sample.fitness]);
         end
         
-        indexes(i) = curr_value_index;
+        indexes(i) = population_indexes_sample(curr_value_index);
     end
 
     parents = population(indexes);

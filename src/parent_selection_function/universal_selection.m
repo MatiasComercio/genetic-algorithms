@@ -1,23 +1,24 @@
 function parents = universal_selection(population, K, ~)
     population_fitness = calculate_population_fitness(population);
     indexes = zeros(K);
-    random = rand();
-    r = zeros(K);
     
+    r = rand();
     % Obtain the rest of the r's from the random value
+    randoms = zeros(K);
     for j = 1:K
-        r(j) = (random + j - 1) / K;
+        randoms(j) = (r + j - 1) / K;
     end
-    
-    prev_cum_population_fitness = 0;
+
     for i = 1:K
-        curr_cum_population_fitness = ...
-            population_fitness(i).acumulated_fitness;
-        r_i = r(i);
+        r_i = randoms(i);
         
+        prev_cum_population_fitness = 0;
         % Check if for any individual the r_i is bounded between
         % the current fitness cumsum and the previous fitness cumsum
         for j = 1:length(population)
+            curr_cum_population_fitness = ...
+                population_fitness(j).acumulated_fitness;
+        
             if (prev_cum_population_fitness < r_i && ...
                     r_i < curr_cum_population_fitness)
                 indexes(i) = j;
@@ -25,10 +26,9 @@ function parents = universal_selection(population, K, ~)
                 % Stop searching for an individual with the current r_i
                 break;
             end
+            
+            prev_cum_population_fitness = curr_cum_population_fitness;
         end
-        
-        prev_cum_population_fitness = ...
-            curr_cum_population_fitness;
     end
     
     parents = population(indexes);
