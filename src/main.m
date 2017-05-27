@@ -1,7 +1,7 @@
 config = get_config('main');
 N = config.N;
 K = config.K;
-T = config.initial_T;
+T = config.temperature_initial;
 fitness_function = config.fitness_function;
 stats_multiplier = config.stats_multiplier;
 get_temperature = config.temperature_function;
