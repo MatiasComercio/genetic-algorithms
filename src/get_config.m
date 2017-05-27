@@ -44,6 +44,7 @@ function out = get_config( input_string )
             out.stats_multiplier.vitality = 1;
 	case 'tournament_selection'        
             out.m = 2;
+            out.random_limit = 0.75;
 	otherwise
             error('%s config not found', upper(input_string));
     end

@@ -1,6 +1,7 @@
 function parents = tournament_probabilistic_selection( population, K, ~ )
     config = get_config('tournament_selection');
     m = config.m;
+    random_limit = config.random_limit;
     
     population_indexes = 1:length(population);
     population_fitness = calculate_population_fitness(population);
@@ -12,7 +13,7 @@ function parents = tournament_probabilistic_selection( population, K, ~ )
         population_fitness_sample = ...
             population_fitness(population_indexes_sample);
         % Get the index of the max or min fitness in the sample taken
-        if (rand() < 0.75)
+        if (rand() < random_limit)
             [~, curr_value_index] = max([population_fitness_sample.fitness]);
         else
             [~, curr_value_index] = min([population_fitness_sample.fitness]);
