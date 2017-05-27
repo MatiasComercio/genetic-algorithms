@@ -8,7 +8,7 @@ function out = get_config( input_string )
             out.min_height = 1.3;
             out.max_height = 2;
             out.crossover_probability = 1; % Probability that 2 given parents will cross
-            out.mutation_probability = 0; % Probability that a given child attribute will mutate (normally: 0.003)
+            out.mutation_probability = 0.003; % Probability that a given child attribute will mutate (normally: 0.003)
             
             % Possible: assassin_fitness
             %           defender_fitness
