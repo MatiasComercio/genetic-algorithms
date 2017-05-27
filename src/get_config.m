@@ -4,9 +4,11 @@ function out = get_config( input_string )
     switch lower(input_string)
         case 'main'
             out.N = 10; % Population Size
-            out.K = 2; % Parent Selection Amount
+            out.K = 2; % Parent Selection Amount // MUST be even!
             out.min_height = 1.3;
             out.max_height = 2;
+            out.crossover_probability = 1; % Probability that 2 given parents will cross
+            out.mutation_probability = 0; % Probability that a given child attribute will mutate (normally: 0.003)
             
             % Possible: assassin_fitness
             %           defender_fitness
@@ -26,14 +28,14 @@ function out = get_config( input_string )
             %           ranking_selection
             out.parent_selection_function = @boltzmann_selection;
             
-            % Possible: @(parent1, parent2) one_point_crossover(parent1, parent2, point)
-            %           @(parent1, parent2) two_point_crossover(parent1, parent2, point1, point2)
-            %           @(parent1, parent2) uniform_crossover(parent1, parent2, point1, length)
-            %           @(parent1, parent2) annular_crossover(parent1, parent2, probability)
+            % Possible: one_point_crossover
+            %           two_point_crossover
+            %           annular_crossover
+            %           @(parent1, parent2, mutation_probability) uniform_crossover(parent1, parent2, mutation_probability, 0.5)
             %
-            % Usage: Replace 'point' (between 1 and 6), 'length' (between 1 and 5) and 'probability' with the
-            % desired constants
-            out.crossover_function = @(parent1, parent2) one_point_crossover(parent1, parent2, 3);
+            % Note: For uniform_crossover, replace '0.5' with the desired probability (probability that 
+            % 2 given parent's attributes will swap)
+            out.crossover_function = @one_point_crossover;
             
             % Multiplier Corresponding to the Assassin 3 Class
             out.stats_multiplier = struct;
