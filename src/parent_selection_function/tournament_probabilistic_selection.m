@@ -19,6 +19,10 @@ function parents = tournament_probabilistic_selection( population, K, ~ )
             [~, curr_value_index] = min([population_fitness_sample.fitness]);
         end
         
+        % Store the index of the desired individual in population.
+        % The index is stored in the population_indexes_sample.
+        % curr_value_index is the index in which the index of
+        % the individual is stored
         indexes(i) = population_indexes_sample(curr_value_index);
     end
 
