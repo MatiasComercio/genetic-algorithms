@@ -1,8 +1,6 @@
 function parents = boltzmann_selection( population, K, T )
-
-    population_fitness = calculate_population_fitness(population);
     % Calc exptected values
-    exp_aux = exp.^([population_fitness.fitness]./T);
+    exp_aux = exp([population(:).fitness]./T);
     expected_values = exp_aux ./ mean(exp_aux);
     
     % Sort the expected values from high to low
@@ -11,17 +9,15 @@ function parents = boltzmann_selection( population, K, T )
         sort(expected_values, 'descend');
     
     % Get cumulated fitness
-    F = sum([population_fitness(:).fitness]);
-    
-    % Get K random values in [0,F]
-    randoms = F .* rand(K,1);
+    F = sum([population(:).fitness]);
     
     % Iterate over all the random values
     indexes = zeros(K,1);
     for i = 1:K
-        r_i = randoms(i);
+        % Random value in [0,F]
+        r_i = F .* rand();
         
-        sort_index = find(r_i < sort_expected_values, 1);
+        sort_index = find(sort_expected_values > r_i, 1);
         indexes(i) = sort_expected_values_indexes(sort_index);
     end
     
