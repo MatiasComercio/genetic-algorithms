@@ -1,6 +1,6 @@
 function parents = universal_selection(population, K, ~)
     population_fitness = calculate_population_fitness(population);
-    indexes = zeros(K);
+    indexes = zeros(K,1);
     r = rand();
     
     % accumulated_fitness is in ascending order implicitly

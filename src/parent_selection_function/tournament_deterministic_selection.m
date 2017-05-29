@@ -5,7 +5,7 @@ function parents = tournament_deterministic_selection( population, K, ~ )
     population_indexes = 1:length(population);
     population_fitness = calculate_population_fitness(population);
 
-    indexes = zeros(K);
+    indexes = zeros(K,1);
     for i = 1:K
         % Obtain a random sample of indexes from the population
         population_indexes_sample = randsample(population_indexes, m);

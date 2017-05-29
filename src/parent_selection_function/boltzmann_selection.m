@@ -17,7 +17,7 @@ function parents = boltzmann_selection( population, K, T )
     randoms = F .* rand(K,1);
     
     % Iterate over all the random values
-    indexes = zeros(K);
+    indexes = zeros(K,1);
     for i = 1:K
         r_i = randoms(i);
         
