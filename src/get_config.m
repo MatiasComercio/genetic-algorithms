@@ -14,14 +14,17 @@ function out = get_config( input_string )
             %           warrior_fitness
             out.fitness_function = @assassin_fitness;
             
+            % Possible: exponential_temperature
+            out.temperature_function = @exponential_temperature;
+            out.temperature_initial = NaN;
             % Possible: elite_selection
             %           roulette_selection
             %           universal_selection
             %           boltzmann_selection
-            %           deterministic_tournament_selection
-            %           probabilistic_tournament_selection
+            %           tournament_deterministic_selection
+            %           tournament_probabilistic_selection
             %           ranking_selection
-            out.parent_selection_function = @elite_selection;
+            out.parent_selection_function = @boltzmann_selection;
             
             % Possible: @(parent1, parent2) one_point_crossover(parent1, parent2, point)
             %           @(parent1, parent2) two_point_crossover(parent1, parent2, point1, point2)
@@ -39,7 +42,10 @@ function out = get_config( input_string )
             out.stats_multiplier.expertise = 1;
             out.stats_multiplier.resistance = 1.1;
             out.stats_multiplier.vitality = 1;
-     otherwise
+	case 'tournament_selection'        
+            out.m = 2;
+            out.random_limit = 0.75;
+	otherwise
             error('%s config not found', upper(input_string));
     end
 end
