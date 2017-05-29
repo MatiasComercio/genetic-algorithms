@@ -14,7 +14,8 @@ function parents = tournament_deterministic_selection( population, K, ~ )
         % Get the index of the max fitness in the sample taken
         [~, max_value_index] = max([population_fitness_sample(:).fitness]);
         
-        % Obtain the index of the individual in population.
+        % Obtain the index of the individual in population and store it
+        % in the array indexes.
         % The index is stored in the population_indexes_sample.
         % max_value_index is the index in which the index of
         % the individual is stored
