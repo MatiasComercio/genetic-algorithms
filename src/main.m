@@ -10,7 +10,7 @@ get_temperature = config.temperature_function;
 min_height = config.min_height;
 max_height = config.max_height;
 parent_selection_function = config.parent_selection_function;
-crossover_function = config.crossover_function;
+crossover_function = crossover_function_builder(config.crossover_function);
 
 population = initialize_population(N, fitness_function, stats_multiplier, min_height, max_height);
 generation = 0;

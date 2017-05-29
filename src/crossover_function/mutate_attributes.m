@@ -14,19 +14,17 @@ end
 
 %% Private Functions
 function items_set = mutate_items_set(items_set, all_items, mutation_probability)
+    items_set.boots = mutate_item(all_items, 'boots', items_set.boots, mutation_probability);
+    items_set.chest = mutate_item(all_items, 'chests', items_set.chest, mutation_probability);
+    items_set.gloves = mutate_item(all_items, 'gloves', items_set.gloves, mutation_probability);
+    items_set.helmet = mutate_item(all_items, 'helmets', items_set.helmet, mutation_probability);
+    items_set.weapon = mutate_item(all_items, 'weapons', items_set.weapon, mutation_probability);
+end
+
+function item = mutate_item(all_items, item_name, old_item, mutation_probability)
     if rand() < mutation_probability
-        items_set.boots = datasample(all_items('boots'), 1);
-    end
-    if rand() < mutation_probability
-        items_set.chest = datasample(all_items('chests'), 1);
-    end
-    if rand() < mutation_probability
-        items_set.gloves = datasample(all_items('gloves'), 1);
-    end
-    if rand() < mutation_probability
-        items_set.helmet = datasample(all_items('helmets'), 1);
-    end
-    if rand() < mutation_probability
-        items_set.weapon = datasample(all_items('weapons'), 1);
+        item = datasample(all_items(item_name), 1);
+    else
+        item = old_item;
     end
 end

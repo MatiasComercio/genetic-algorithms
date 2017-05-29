@@ -31,11 +31,11 @@ function out = get_config( input_string )
             % Possible: one_point_crossover
             %           two_point_crossover
             %           annular_crossover
-            %           @(parent1, parent2, mutation_probability) uniform_crossover(parent1, parent2, mutation_probability, 0.5)
+            %           uniform_crossover
             %
-            % Note: For uniform_crossover, replace '0.5' with the desired probability (probability that 
-            % 2 given parent's attributes will swap)
-            out.crossover_function = @one_point_crossover;
+            % Note: For uniform_crossover, replace configure the desired probability in the corresponding
+            % case in this file (probability that 2 given parent's attributes will swap)
+            out.crossover_function = @uniform_crossover;
             
             % Multiplier Corresponding to the Assassin 3 Class
             out.stats_multiplier = struct;
@@ -47,6 +47,8 @@ function out = get_config( input_string )
 	case 'tournament_selection'        
             out.m = 2;
             out.random_limit = 0.75;
+    case 'uniform_crossover'
+            out.p = 0.5;
 	otherwise
             error('%s config not found', upper(input_string));
     end
