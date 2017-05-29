@@ -15,7 +15,7 @@ function [child1_attributes, child2_attributes] = two_point_crossover(parent1_at
         child2_attributes(i) = parent1_attributes(i);
     end
     
-    for i=point2+1:length(parent1_attributes)
+    for i=point2+1:len
         child1_attributes(i) = parent1_attributes(i);
         child2_attributes(i) = parent2_attributes(i);
     end
