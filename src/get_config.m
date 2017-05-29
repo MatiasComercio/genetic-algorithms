@@ -26,7 +26,7 @@ function out = get_config( input_string )
             %           tournament_deterministic_selection
             %           tournament_probabilistic_selection
             %           ranking_selection
-            out.parent_selection_function = @boltzmann_selection;
+            out.parent_selection_function = @elite_selection;
             
             % Possible: one_point_crossover
             %           two_point_crossover

@@ -1,10 +1,13 @@
-function children = parents_crossover(parents, crossover_function, K, crossover_probability, mutation_probability)
+function children = parents_crossover(parents, crossover_function, ...
+    crossover_probability, mutation_probability)
+    K = length(parents);
     children(K) = parents(K);
     % Shuffle parents
-    shuffled_parents = datasample(parents, length(parents), 'Replace', false);
+    shuffled_parents = datasample(parents, K, 'Replace', false);
     for i=1:2:K
         if rand() < crossover_probability
-            [child1, child2] = crossover_function(shuffled_parents(i), shuffled_parents(i+1), mutation_probability);
+            [child1, child2] = crossover_function(shuffled_parents(i), ...
+                shuffled_parents(i+1), mutation_probability);
             children(i) = child1;
             children(i+1) = child2;
         else

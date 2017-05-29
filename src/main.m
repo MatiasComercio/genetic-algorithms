@@ -20,7 +20,7 @@ while ~finished
     T = get_temperature(generation, T);
     % TODO: implement a two-function-selection
     parents = parent_selection_function(population, K, T);
-    children = parents_crossover(parents, crossover_function, K, crossover_probability, mutation_probability);
+    children = parents_crossover(parents, crossover_function, crossover_probability, mutation_probability);
     %population = horzconcat(parent, children);
     %population_fitness = calculate_population_fitness(population);
     %population = replace_population(population, population_fitness);
