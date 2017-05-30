@@ -17,6 +17,7 @@ generation = 0;
 
 finished = false;
 while ~finished
+    plot_population_fitness_stats(generation, population);
     T = get_temperature(generation, T);
     % TODO: implement a two-function-selection
     parents = parent_selection_function(population, K, T);
