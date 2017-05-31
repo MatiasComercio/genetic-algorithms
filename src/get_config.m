@@ -5,7 +5,7 @@ function out = get_config( input_string )
         case 'main'
             out.N = 100; % Population Size
             % Parent Selection Amount
-            % Note that if using replace_pupulation_function is
+            % Note that if using replace_population_function is
             % @replace_all_parents, this value should be set equal to N
             out.K = 70;
             out.min_height = 1.3;
@@ -56,12 +56,12 @@ function out = get_config( input_string )
             %           replace_with_all_children
             %           replace_mixed
             %           generational_gap
-            out.replace_pupulation_function = @generational_gap;
-            % Replacement Amount (used only if replace_pupulation_function
+            out.replace_population_function = @generational_gap;
+            % Replacement Amount (used only if replace_population_function
             % is @replace_mixed (method 3)
             out.k_replace = 10;
             % Generational Gap (used only if
-            % replace_pupulation_function is @generational_gap)
+            % replace_population_function is @generational_gap)
             % Consider generating the correct amout of children for this
             % algorithm to be able to run
             out.G = 0.7;

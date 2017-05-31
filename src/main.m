@@ -25,7 +25,7 @@ crossover_function = crossover_function_builder(config.crossover_function);
 % Replace variables
 k_replace = config.k_replace;
 G = config.G;
-replace_population_function = config.replace_pupulation_function;
+replace_population_function = config.replace_population_function;
 replace_selection_function = selection_function_builder(...
     config.replace_selection_function_1, ...
     config.replace_selection_function_2, config.B);
