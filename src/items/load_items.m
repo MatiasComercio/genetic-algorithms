@@ -24,5 +24,4 @@ function class_stats = load_class_stats(class_name)
         class_stats(i).resistance = class_stats_original.Re(i);
         class_stats(i).vitality = class_stats_original.Vi(i);
     end
-    
 end
