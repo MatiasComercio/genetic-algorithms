@@ -33,9 +33,9 @@ function out = get_config( input_string )
             %           tournament_probabilistic_selection
             %           ranking_selection
             out.parent_selection_function_1 = @elite_selection;
-            out.parent_selection_function_2 = @roulette_selection;
+            out.parent_selection_function_2 = @boltzmann_selection;
             out.replace_selection_function_1 = @elite_selection;
-            out.replace_selection_function_2 = @roulette_selection;
+            out.replace_selection_function_2 = @boltzmann_selection;
 
             % Percentage of first parent selection function to be taken
             out.A = .10;
@@ -70,7 +70,7 @@ function out = get_config( input_string )
             %           fitness_threshold_reached
             %           max_fitness_stucked
             %           population_stucked
-            out.have_to_finish_function = @population_stucked;
+            out.have_to_finish_function = @max_fitness_stucked;
             
             % Multiplier Corresponding to the Assassin 3 Class
             out.stats_multiplier = struct;
@@ -86,19 +86,19 @@ function out = get_config( input_string )
             out.p = 0.5;
         % Variables for have_to_finish_functions
         case 'max_generations'
-            out.max_generations = 10000;
+            out.max_generations = 100;
         case 'fitness_threshold_reached'
             % Ideal expected fitness
             out.fitness_threshold = 20.30;
         case 'max_fitness_stucked'
             % How many previous generations will be consider to evaluate
             % the evolution of the max fitness on the population
-            out.i_generations_gap = 15;
+            out.i_generations_gap = 50;
             % Which is the lower expected variation of the max fitness of
             % the populatio along the i_generation_gap generations
             % (note that both positive and negative values are possible,
             % but negative values don't have much sense)
-            out.expected_delta_threshold = .02;
+            out.expected_delta_threshold = .001;
         case 'population_stucked'
             % How many previous generations will be consider to evaluate
             % the amount of individuals that changed on the population
@@ -107,6 +107,14 @@ function out = get_config( input_string )
             % individuals of the populatio along the i_generation_gap 
             % generations. Possible values in range [0 ; 1]
             out.expected_percentage_threshold = .05;
+        case 'exponential_temperature'
+            % Recommended values: T = exp(-generation .* .005 + 5) + 1,
+            %   .005: x_multiply_constant
+            %   5: x_add_constant
+            %   1: exp_add_constant
+            out.x_multiply_constant = .005;
+            out.x_add_constant = 5;
+            out.exp_add_constant = 1;
         otherwise
             error('%s config not found', upper(input_string));
     end
