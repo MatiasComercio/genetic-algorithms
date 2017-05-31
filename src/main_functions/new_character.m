@@ -1,6 +1,8 @@
-function character = new_character( height, items_set, fitness_function, stats_multiplier )
+function character = new_character(height, items_set, fitness_function, ...
+    stats_multiplier, parents_ids)
     character = struct;
     character.id = get_new_id;
+    character.parents_ids = parents_ids;
     character.height = height;
     character.items_set = items_set;
     character.stats_multiplier = stats_multiplier;

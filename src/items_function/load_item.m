@@ -1,5 +1,5 @@
 function item = load_item(item_values)
-  indexes = get_config('class_file_indexes');
+  indexes = get_config('items_files');
   item.id = item_values(indexes.id);
   item.strength = item_values(indexes.strength);
   item.agility = item_values(indexes.agility);
