@@ -54,19 +54,28 @@ function raw_character_stats = calculate_raw_character_stats(items_set, stats_mu
 end
 
 function character_stats = calculate_character_stats(raw_stats)
+    % Max possible value = 100
     character_stats.strength = 100 * tanh(0.01 * raw_stats.strength);
+    % Max possible value = 1
     character_stats.agility = tanh(0.01 * raw_stats.agility);
+    % Max possible value = 0.6
     character_stats.expertise = 0.6 * tanh(0.01 * raw_stats.expertise);
+    % Max possible value = 1
     character_stats.resistance = tanh(0.01 * raw_stats.resistance);
+    % Max possible value = 100
     character_stats.vitality = 100 * tanh(0.01 * raw_stats.vitality);
 end
 
 function attack = calculate_attack(h, stats)
+    % Global max: h = 1.9152 => atk(h) ~= 1.7045
     attack_modifier = 0.5 - ( 3 * h - 5 )^4 + ( 3 * h - 5 )^2 + h/2;
+    % Max possible value ~= (1 + 0.6) * 100 * 1.71 = 273.6
     attack = (stats.agility + stats.expertise) * stats.strength * attack_modifier;
 end
 
 function defense = calculate_defense(h, stats)
+    % Global max: h = 1.6393 => atk(h) ~= 1.1736
     defense_modifier = 2 + ( 3 * h - 5 )^4 - ( 3 * h - 5 )^2 - h/2;
+    % Max possible value ~= (1 + 0.6) * 100 * 1.18 = 188.8
     defense = (stats.resistance + stats.expertise) * stats.vitality * defense_modifier;
 end
