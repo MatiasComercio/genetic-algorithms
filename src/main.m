@@ -1,7 +1,3 @@
-% Sadly, the only way to restore the id_counter for a matlab enviroment
-% without adding some parameters to more than 5 functions
-clear global id_counter;
-
 % Load main config
 config = get_config('main');
 
@@ -36,6 +32,9 @@ have_to_finish_function = config.have_to_finish_function;
 % Generate initial conditions
 % Take the first generation as the previous looped if it already exists
 if ~exist('population','var')
+    % Sadly, the only way to restore the id_counter for a matlab enviroment
+    % without adding some parameters to more than 5 functions
+    clear global id_counter;
     population = initialize_population(N, fitness_function, ...
         stats_multiplier, min_height, max_height);
 end
