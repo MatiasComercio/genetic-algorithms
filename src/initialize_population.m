@@ -1,17 +1,17 @@
-function population = initialize_population(population_size, fitness_function, stats_multiplier, min_height, max_height)
-    all_items = load_items();
+function population = initialize_population(population_size, ...
+    fitness_function, stats_multiplier, min_height, max_height, all_data)
     for i=1:population_size
-        items_set = choose_random_items_set(all_items);
+        items_set = choose_random_items_set(all_data);
         height = rand_double(min_height, max_height);
         population(i) = new_character(height, items_set, fitness_function, stats_multiplier);
     end        
 end
 
 %% Private Functions
-function items_set = choose_random_items_set(all_items)
-    items_set.boots = datasample(all_items('boots'), 1);
-    items_set.chest = datasample(all_items('chests'), 1);
-    items_set.gloves = datasample(all_items('gloves'), 1);
-    items_set.helmet = datasample(all_items('helmets'), 1);
-    items_set.weapon = datasample(all_items('weapons'), 1);
+function items_set = choose_random_items_set(all_data)
+    items_set.boots = load_sample_item(all_data, 'boots');
+    items_set.chest = load_sample_item(all_data, 'chests');
+    items_set.gloves = load_sample_item(all_data, 'gloves');
+    items_set.helmet = load_sample_item(all_data, 'helmets');
+    items_set.weapon = load_sample_item(all_data, 'weapons');
 end
