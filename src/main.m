@@ -1,6 +1,11 @@
 % Load main config
 config = get_config('main');
 
+% Load data if not already loaded
+if ~exist('all_data','var')
+  all_data = load_data;
+end
+
 % General variables
 N = config.N;
 fitness_function = config.fitness_function;
@@ -36,7 +41,7 @@ if ~exist('population','var')
     % without adding some parameters to more than 5 functions
     clear global id_counter;
     population = initialize_population(N, fitness_function, ...
-        stats_multiplier, min_height, max_height);
+        stats_multiplier, min_height, max_height, all_data);
 end
 generation = 0;
 % Loop until the expected finsish condition is met
@@ -49,7 +54,7 @@ while ~have_to_finish_function(population, generation)
     parents = parent_selection_function(population, K, T);
     % Get children from crossover selected parents
     children = parents_crossover(parents, crossover_function, ...
-        crossover_probability, mutation_probability);
+        crossover_probability, mutation_probability, all_data);
     % Replace the population of the current generation
     population = replace_population_function(N, K, k_replace, G, ...
       T, replace_selection_function, population, children);

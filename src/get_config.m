@@ -7,14 +7,14 @@ function out = get_config( input_string )
             % Parent Selection Amount
             % Note that if using replace_population_function is
             % @replace_all_parents, this value should be set equal to N
-            out.K = 70;
+            out.K = 80;
             out.min_height = 1.3;
             out.max_height = 2;
             % Probability that 2 given parents will cross
             out.crossover_probability = .8;
             % Probability that a given child attribute will mutate
             % (normally: 0.003)
-            out.mutation_probability = 0.003;
+            out.mutation_probability = 0.005;
             
             % Possible: assassin_fitness
             %           defender_fitness
@@ -64,7 +64,7 @@ function out = get_config( input_string )
             % replace_population_function is @generational_gap)
             % Consider generating the correct amout of children for this
             % algorithm to be able to run
-            out.G = 0.7;
+            out.G = 0.8;
             
             % Possible: generations_limit_reached
             %           fitness_threshold_reached
@@ -93,7 +93,7 @@ function out = get_config( input_string )
         case 'max_fitness_stucked'
             % How many previous generations will be consider to evaluate
             % the evolution of the max fitness on the population
-            out.i_generations_gap = 50;
+            out.i_generations_gap = 200;
             % Which is the lower expected variation of the max fitness of
             % the populatio along the i_generation_gap generations
             % (note that both positive and negative values are possible,
@@ -115,6 +115,17 @@ function out = get_config( input_string )
             out.x_multiply_constant = .005;
             out.x_add_constant = 5;
             out.exp_add_constant = 1;
+        case 'class_file_indexes'
+            out.first_row = 1;
+            out.last_row = 1000000;
+            out.first_col = 0;
+            out.last_col = 5;
+            out.id = 1; % id
+            out.strength = 2; % Fu
+            out.agility = 3; % Ag
+            out.expertise = 4; % Ex
+            out.resistance = 5; % Re
+            out.vitality = 6; % Vi
         otherwise
             error('%s config not found', upper(input_string));
     end
