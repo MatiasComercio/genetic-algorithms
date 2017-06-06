@@ -1,13 +1,15 @@
-function crossover_function = crossover_function_builder(crossover_selected_function)
+function crossover_function = crossover_function_builder(...
+    crossover_selected_function, mutation_function)
     crossover_function = @(parent1, parent2, mutation_probability, ...
         all_data) get_crossover_function(crossover_selected_function, ...
-        parent1, parent2, mutation_probability, all_data);
+        parent1, parent2, mutation_function, mutation_probability, ...
+        all_data);
 end
 
 %% Private Functions
 function [child1, child2] = get_crossover_function(...
     crossover_selected_function, parent1, parent2, ...
-    mutation_probability, all_data)
+    mutation_function, mutation_probability, all_data)
     % Attributes order is considered as follows:
     % parent = [height, boots, chest, gloves, helmet, weapon]
     parent1_attributes = get_parent_attributes(parent1);
@@ -15,12 +17,13 @@ function [child1, child2] = get_crossover_function(...
     
     [child1_attributes, child2_attributes] = crossover_selected_function(parent1_attributes, parent2_attributes);
     
+    parents_ids = [parent1.id, parent2.id];
     % It's assumed that parent1 and parent2 share the same fitness_function
     % and stats_multiplier.
     child1 = new_child(child1_attributes, parent1.fitness_function, parent1.stats_multiplier, ...
-        mutation_probability, all_data);
+        mutation_function, mutation_probability, all_data, parents_ids);
     child2 = new_child(child2_attributes, parent1.fitness_function, parent1.stats_multiplier, ...
-        mutation_probability, all_data);
+        mutation_function, mutation_probability, all_data, parents_ids);
 end
 
 function parent_attributes = get_parent_attributes(parent)
@@ -29,8 +32,10 @@ function parent_attributes = get_parent_attributes(parent)
 end
 
 function child = new_child(child_attributes, fitness_function, ...
-    stats_multiplier, mutation_probability, all_data)
-    [height, items_set] = mutate_attributes(child_attributes, ...
+    stats_multiplier, mutation_function, mutation_probability, ...
+    all_data, parents_ids)
+    [height, items_set] = mutation_function(child_attributes, ...
         mutation_probability, all_data);
-    child = new_character(height, items_set, fitness_function, stats_multiplier);
+    child = new_character(height, items_set, fitness_function, ...
+        stats_multiplier, parents_ids);
 end

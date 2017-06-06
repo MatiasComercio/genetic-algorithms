@@ -1,0 +1,1 @@
+close; clear population; main
