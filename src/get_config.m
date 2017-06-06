@@ -48,7 +48,7 @@ function out = get_config( input_string )
             out.crossover_probability = .95;
             % Probability that a given child attribute || child
             % (depending on the chosen mutate_function) will mutate
-            out.mutation_probability = 9e-2;
+            out.mutation_probability = 5e-2;
             
             % Possible: assassin_fitness
             %           defender_fitness
@@ -103,7 +103,7 @@ function out = get_config( input_string )
             %   mutate_probability
             % - mutate_attributes: Probabily mutate_probability to mutate
             %   each attribute (i.e.: each gen)
-            out.mutation_function = @mutate_individual;
+            out.mutation_function = @mutate_attributes;
 
             % Replace function
             % Possible: replace_all_parents (replace method 1)
